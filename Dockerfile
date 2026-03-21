@@ -16,12 +16,12 @@ RUN npm install --ignore-scripts --legacy-peer-deps --no-audit --no-fund
 
 COPY . .
 
+# next build ДОЛЖЕН идти с NODE_ENV=production (иначе Turbopack/React ломаются на prerender)
+ENV NODE_ENV=production
 # Сборка без migrate: в Docker build нет DATABASE_URL (P1012). Миграции — при старте.
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_OPTIONS=--max-old-space-size=4096
 RUN npm run build:docker
-
-ENV NODE_ENV=production
 EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
