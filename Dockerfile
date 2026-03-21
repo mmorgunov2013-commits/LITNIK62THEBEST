@@ -9,13 +9,17 @@ RUN apt-get update -y \
   && rm -rf /var/lib/apt/lists/*
 
 COPY package.json package-lock.json ./
-RUN npm ci
+# npm ci часто падает на CI/Docker при мелких рассинхронах lock или peer-deps.
+# DevDependencies нужны для next build (TypeScript, tailwind, eslint).
+ENV NODE_ENV=development
+RUN npm install
 
 COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
+ENV NODE_ENV=production
 EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
