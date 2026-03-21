@@ -1,22 +1,23 @@
 # Next.js + Prisma для Render (Docker Web Service)
-# В панели Render должны быть заданы DATABASE_URL и ADMIN_JWT_SECRET (для билда нужен DATABASE_URL).
+# В панели Render: DATABASE_URL, ADMIN_JWT_SECRET (для prisma migrate в build).
 
 FROM node:20-bookworm-slim AS base
 WORKDIR /app
 
+# python3/make/g++ — если какой-то пакет тянет нативную сборку; openssl — для Prisma
 RUN apt-get update -y \
-  && apt-get install -y openssl ca-certificates \
+  && apt-get install -y openssl ca-certificates python3 make g++ \
   && rm -rf /var/lib/apt/lists/*
 
 COPY package.json package-lock.json ./
-# npm ci часто падает на CI/Docker при мелких рассинхронах lock или peer-deps.
-# DevDependencies нужны для next build (TypeScript, tailwind, eslint).
 ENV NODE_ENV=development
-RUN npm install
+# postinstall (prisma generate) в Docker иногда падает до полного COPY — отключаем скрипты
+RUN npm install --ignore-scripts --legacy-peer-deps --no-audit --no-fund
 
 COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV NODE_OPTIONS=--max-old-space-size=4096
 RUN npm run build
 
 ENV NODE_ENV=production
