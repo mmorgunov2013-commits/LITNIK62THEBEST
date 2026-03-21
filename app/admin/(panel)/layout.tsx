@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { logoutAction } from "@/app/actions/auth";
 
+/** Админ-страницы с Prisma не должны статически генерироваться при сборке. */
+export const dynamic = "force-dynamic";
+
 export default function AdminPanelLayout({
   children,
 }: {
