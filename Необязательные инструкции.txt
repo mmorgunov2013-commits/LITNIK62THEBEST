@@ -1,0 +1,34 @@
+Use the following structure:
+
+app/
+  (public)/
+    page.tsx
+    catalog/page.tsx
+    catalog/[category]/page.tsx
+    product/[slug]/page.tsx
+    contacts/page.tsx
+  admin/
+    login/page.tsx
+    dashboard/page.tsx
+    products/page.tsx
+    products/new/page.tsx
+    products/[id]/edit/page.tsx
+
+components/
+  ui/
+  layout/
+  catalog/
+  admin/
+  forms/
+
+lib/
+  prisma.ts
+  utils.ts
+  validations.ts
+
+data/
+  seed-products.ts
+
+prisma/
+  schema.prisma
+  seed.ts

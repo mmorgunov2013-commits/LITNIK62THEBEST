@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ProductStatus {
+  DRAFT
+  ACTIVE
+  HIDDEN
+}
+
+model Category {
+  id               String    @id @default(cuid())
+  slug             String    @unique
+  name             String
+  shortDescription String?
+  sortOrder        Int       @default(0)
+  products         Product[]
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+}
+
+model Product {
+  id                       String          @id @default(cuid())
+  slug                     String          @unique
+  title                    String
+  alloyMark                String
+  categoryId               String
+  category                 Category        @relation(fields: [categoryId], references: [id])
+  shortDescription         String
+  fullDescription          String?
+  application              String?
+  features                 String?
+  compositionText          String?
+  gostReference            String?
+  colorType                String?
+  meltingRange             String?
+  pricePerKg               Float?
+  priceNote                String?
+  priceDisplayOverride     String?
+  image                    String?
+  status                   ProductStatus   @default(ACTIVE)
+  sortOrder                Int             @default(0)
+  seoTitle                 String?
+  seoDescription           String?
+  seoH1                    String?
+  internalAnalogLabel      String?
+  internalThirdPartyDocUrl String?
+  specs                    ProductSpec[]
+  leads                    Lead[]
+  createdAt                DateTime        @default(now())
+  updatedAt                DateTime        @updatedAt
+}
+
+model ProductSpec {
+  id        String  @id @default(cuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  parameter String
+  value     String
+  sortOrder Int     @default(0)
+}
+
+model Lead {
+  id            String   @id @default(cuid())
+  name          String
+  phone         String
+  email         String?
+  alloyInterest String?
+  volume        String?
+  comment       String?
+  source        String?
+  productId     String?
+  product       Product? @relation(fields: [productId], references: [id])
+  createdAt     DateTime @default(now())
+}
+
+model AdminUser {
+  id           String @id @default(cuid())
+  email        String @unique
+  passwordHash String
+}

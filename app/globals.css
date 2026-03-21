@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0c0d0f;
+  --surface: #14161a;
+  --surface2: #1a1d22;
+  --border: rgba(255, 255, 255, 0.08);
+  --text: #e8eaef;
+  --muted: #9aa3b2;
+  --accent: #c9a962;
+  --accent-dim: rgba(201, 169, 98, 0.12);
+}
+
+@theme inline {
+  --color-lit-bg: var(--bg);
+  --color-lit-surface: var(--surface);
+  --color-lit-surface2: var(--surface2);
+  --color-lit-border: var(--border);
+  --color-lit-text: var(--text);
+  --color-lit-muted: var(--muted);
+  --color-lit-accent: var(--accent);
+  --font-sans: var(--font-manrope);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-manrope), system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--accent-dim);
+  color: var(--text);
+}
+
+@keyframes lit-category-shimmer {
+  0% {
+    transform: translateX(-130%) skewX(-14deg);
+    opacity: 0;
+  }
+  18% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(130%) skewX(-14deg);
+    opacity: 0;
+  }
+}
+
+.animate-lit-category-shimmer {
+  animation: lit-category-shimmer 1.4s ease-out forwards;
+}
+
+.animate-lit-category-shimmer-loop {
+  animation: lit-category-shimmer 1.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-lit-category-shimmer,
+  .animate-lit-category-shimmer-loop {
+    animation: none;
+  }
+}
+
