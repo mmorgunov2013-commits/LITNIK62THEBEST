@@ -2,6 +2,7 @@ import Link from "next/link";
 
 const nav = [
   { href: "/catalog", label: "Каталог" },
+  { href: "/informatsiya", label: "Информация" },
   { href: "/contacts", label: "Контакты" },
 ];
 
@@ -15,7 +16,7 @@ export function SiteHeader() {
         >
           ЛИТНИК
         </Link>
-        <nav className="flex items-center gap-8 text-sm">
+        <nav className="flex flex-wrap items-center justify-end gap-x-6 gap-y-2 text-sm sm:gap-x-8">
           {nav.map((item) => (
             <Link
               key={item.href}

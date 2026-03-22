@@ -28,6 +28,14 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
+                  href="/informatsiya"
+                  className="text-[var(--muted)] hover:text-[var(--accent)]"
+                >
+                  Информация
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/contacts"
                   className="text-[var(--muted)] hover:text-[var(--accent)]"
                 >
