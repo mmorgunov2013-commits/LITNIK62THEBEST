@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import "./globals.css";
+import { AssistantChatDock } from "@/components/chat/AssistantChatDock";
 import { siteConfig } from "@/lib/site";
 
 const manrope = Manrope({
@@ -25,6 +26,7 @@ export default function RootLayout({
     <html lang="ru" className={`${manrope.variable} h-full`}>
       <body className={`${manrope.className} min-h-full antialiased`}>
         {children}
+        <AssistantChatDock />
       </body>
     </html>
   );
