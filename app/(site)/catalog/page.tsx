@@ -32,7 +32,7 @@ export default async function CatalogLandingPage() {
   ];
 
   return (
-    <section className="relative min-h-[min(88vh,52rem)] overflow-hidden border-b border-white/[0.08]">
+    <section className="relative flex min-h-[min(92vh,56rem)] flex-col overflow-hidden border-b border-white/[0.08]">
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
@@ -44,11 +44,15 @@ export default async function CatalogLandingPage() {
         className="absolute inset-0 bg-gradient-to-b from-[#0c0d0f]/88 via-[#0c0d0f]/72 to-[var(--bg)]"
         aria-hidden
       />
-      <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
-        <h1 className="text-xl font-semibold tracking-tight text-[var(--text)] sm:text-2xl">
+      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-end px-4 pb-10 pt-10 sm:px-6 sm:pb-14 sm:pt-16">
+        <h1 className="mb-6 text-xl font-semibold tracking-tight text-[var(--text)] sm:mb-8 sm:text-2xl">
           Каталог продукции
         </h1>
-        <CategoryHeroCards heading={null} categories={cards} />
+        <CategoryHeroCards
+          heading={null}
+          categories={cards}
+          photoPlaceholders
+        />
       </div>
     </section>
   );

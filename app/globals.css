@@ -62,3 +62,27 @@ body {
   }
 }
 
+/* Заглушки фото над карточками каталога: «выплывание» вверх при загрузке */
+@keyframes lit-catalog-placeholder-rise {
+  from {
+    opacity: 0.88;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-lit-catalog-placeholder-rise {
+  animation: lit-catalog-placeholder-rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-lit-catalog-placeholder-rise {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
