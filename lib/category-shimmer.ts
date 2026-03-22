@@ -24,6 +24,12 @@ export function metalShimmerForSlug(slug: string): {
         beam: "rgba(217, 119, 87, 0.92)",
         glow: "rgba(180, 83, 9, 0.42)",
       };
+    /** Карточка «Всё» на лендинге каталога */
+    case "vse":
+      return {
+        beam: "rgba(214, 189, 120, 0.95)",
+        glow: "rgba(201, 169, 98, 0.48)",
+      };
     default:
       return {
         beam: "rgba(201, 169, 98, 0.85)",

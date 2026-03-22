@@ -9,6 +9,8 @@ export type CategoryCardItem = {
   slug: string;
   name: string;
   shortDescription: string | null;
+  /** Если задан — ведёт сюда вместо `/catalog/[slug]` */
+  href?: string;
 };
 
 const SHIMMER_MS = 1400;
@@ -40,10 +42,16 @@ function HeroCategoryAccent({ src }: { src: string }) {
 export function CategoryHeroCards({
   categories,
   accentImageSrc,
+  heading,
 }: {
   categories: CategoryCardItem[];
   /** PNG/WebP без фона — напоминание под кнопками категорий, не внутри них */
   accentImageSrc?: string | null;
+  /**
+   * Заголовок над сеткой. По умолчанию — «Категории».
+   * Передайте `null`, если заголовок задаётся снаружи (например H1 на /catalog).
+   */
+  heading?: string | null;
 }) {
   const [shimmeringIds, setShimmeringIds] = useState<Set<string>>(() => new Set());
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -108,13 +116,24 @@ export function CategoryHeroCards({
     };
   }, [categories]);
 
+  const gridClass =
+    categories.length >= 5
+      ? "mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5"
+      : "mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4";
+
+  const headingText = heading === undefined ? "Категории" : heading ?? "";
+  const showHeading = heading !== null;
+
   return (
     <>
-      <h2 className="text-xl font-semibold tracking-tight text-[var(--text)] sm:text-2xl">
-        Категории
-      </h2>
-      <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {showHeading ? (
+        <h2 className="text-xl font-semibold tracking-tight text-[var(--text)] sm:text-2xl">
+          {headingText}
+        </h2>
+      ) : null}
+      <ul className={gridClass}>
         {categories.map((c) => {
+          const cardHref = c.href ?? `/catalog/${c.slug}`;
           const { beam, glow } = metalShimmerForSlug(c.slug);
           const isHovered = hoveredId === c.id;
           const isPeriodic = shimmeringIds.has(c.id);
@@ -123,7 +142,7 @@ export function CategoryHeroCards({
           return (
             <li key={c.id}>
               <Link
-                href={`/catalog/${c.slug}`}
+                href={cardHref}
                 className={`relative block overflow-hidden rounded-xl border border-white/[0.1] bg-[#14161a]/75 p-5 backdrop-blur-[6px] transition-[box-shadow,border-color] duration-300 hover:border-[var(--accent)]/35 ${
                   active ? "border-white/20" : ""
                 }`}

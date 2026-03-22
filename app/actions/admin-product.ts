@@ -147,6 +147,7 @@ export async function createProduct(
     return { error: "Не удалось создать товар (возможно, slug уже занят)" };
   }
   revalidatePath("/catalog");
+  revalidatePath("/catalog/all");
   revalidatePath("/");
   redirect("/admin/products");
 }
@@ -253,6 +254,7 @@ export async function updateProduct(
     return { error: "Не удалось сохранить (проверьте slug и данные)" };
   }
   revalidatePath("/catalog");
+  revalidatePath("/catalog/all");
   revalidatePath(`/product/${parsed.data.slug}`);
   redirect("/admin/products");
 }
@@ -261,6 +263,7 @@ export async function deleteProduct(productId: string) {
   await requireAdmin();
   await prisma.product.delete({ where: { id: productId } });
   revalidatePath("/catalog");
+  revalidatePath("/catalog/all");
   revalidatePath("/admin/products");
   redirect("/admin/products");
 }
