@@ -22,6 +22,16 @@
   --font-sans: var(--font-manrope);
 }
 
+html {
+  scroll-behavior: auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 body {
   background: var(--bg);
   color: var(--text);
