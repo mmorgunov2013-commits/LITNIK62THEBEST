@@ -4,7 +4,7 @@ import { HowWeWorkSection } from "@/components/home/HowWeWorkSection";
 import { CategoryHeroCards } from "@/components/home/CategoryHeroCards";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { prisma } from "@/lib/prisma";
-import { siteConfig } from "@/lib/site";
+import { heroBackdropStyle, siteConfig } from "@/lib/site";
 
 export default async function HomePage() {
   const categories = await prisma.category.findMany({
@@ -14,13 +14,7 @@ export default async function HomePage() {
   return (
     <>
       <section className="relative min-h-[min(88vh,52rem)] overflow-hidden border-b border-white/[0.08]">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url(${siteConfig.heroBackgroundImage})`,
-          }}
-          aria-hidden
-        />
+        <div className="absolute inset-0" style={heroBackdropStyle} aria-hidden />
         <div
           className="absolute inset-0 bg-gradient-to-b from-[#0c0d0f]/88 via-[#0c0d0f]/72 to-[var(--bg)]"
           aria-hidden
@@ -54,7 +48,6 @@ export default async function HomePage() {
 
           <div className="mt-14 sm:mt-20">
             <CategoryHeroCards
-              accentImageSrc={siteConfig.heroCategoryAccentImage}
               categories={categories.map((c) => ({
                 id: c.id,
                 slug: c.slug,

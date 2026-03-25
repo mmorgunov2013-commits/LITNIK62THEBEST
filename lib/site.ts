@@ -1,4 +1,6 @@
-/** Один файл в `public/images` — главная (под категориями), каталог, товар без фото */
+import type { CSSProperties } from "react";
+
+/** Плейсхолдер изображения товара в каталоге, если в админке нет своего фото (`hero-category-placeholder.png`) */
 const PLACEHOLDER_PRODUCT_IMAGE = "/images/hero-category-placeholder.png" as const;
 
 export const siteConfig = {
@@ -24,10 +26,16 @@ export const siteConfig = {
   },
   defaultPriceNote:
     "При заказе крупных партий — индивидуальные условия. Фракция, объём и скидки — по согласованию с менеджером.",
-  /** Герой + блок категорий; замените файл в public */
-  heroBackgroundImage: "/images/hero-bg.jpeg",
-  /** Под карточками категорий на главной */
-  heroCategoryAccentImage: PLACEHOLDER_PRODUCT_IMAGE,
+  /** Фон героя (главная и лендинг /catalog) — файл в `public/images` */
+  heroBackgroundImage: "/images/hero-bg.jpg",
   /** Каталог и страница товара, если в админке нет своего фото */
   productImagePlaceholder: PLACEHOLDER_PRODUCT_IMAGE,
 } as const;
+
+/** Фон первого экрана: «крупный план» ×2, якорь — левый нижний угол кадра */
+export const heroBackdropStyle: CSSProperties = {
+  backgroundImage: `url(${siteConfig.heroBackgroundImage})`,
+  backgroundSize: "200% 200%",
+  backgroundPosition: "left bottom",
+  backgroundRepeat: "no-repeat",
+};

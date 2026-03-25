@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { CategoryHeroCards } from "@/components/home/CategoryHeroCards";
 import { prisma } from "@/lib/prisma";
-import { siteConfig } from "@/lib/site";
+import { heroBackdropStyle } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Каталог продукции",
@@ -33,13 +33,7 @@ export default async function CatalogLandingPage() {
 
   return (
     <section className="relative flex min-h-[min(92vh,56rem)] flex-col overflow-hidden border-b border-white/[0.08]">
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `url(${siteConfig.heroBackgroundImage})`,
-        }}
-        aria-hidden
-      />
+      <div className="absolute inset-0" style={heroBackdropStyle} aria-hidden />
       <div
         className="absolute inset-0 bg-gradient-to-b from-[#0c0d0f]/88 via-[#0c0d0f]/72 to-[var(--bg)]"
         aria-hidden
