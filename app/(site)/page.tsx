@@ -13,6 +13,7 @@ export default async function HomePage() {
 
   return (
     <>
+      {/* Только первый экран: фон героя не тянется на блок «Категории» (иначе на телефоне картинка визуально «уезжает» вниз). */}
       <section className="relative min-h-[min(88vh,52rem)] overflow-hidden border-b border-white/[0.08]">
         <div className="absolute inset-0" style={heroBackdropStyle} aria-hidden />
         <div
@@ -20,42 +21,42 @@ export default async function HomePage() {
           aria-hidden
         />
         <div className="relative z-10 mx-auto flex max-w-6xl flex-col px-4 py-16 sm:px-6 sm:py-24">
-          <div className="min-h-0 flex-1">
-            <p className="text-xs font-medium uppercase tracking-[0.2em] text-[var(--accent)]">
-              Производство · B2B
-            </p>
-            <h1 className="mt-5 max-w-4xl text-3xl font-extrabold leading-[1.15] tracking-tight text-[var(--text)] drop-shadow-sm sm:text-4xl sm:leading-[1.12] lg:text-5xl">
-              {siteConfig.heroHeadline}
-            </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[var(--muted)]">
-              {siteConfig.heroSubline}
-            </p>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Link
-                href="/catalog"
-                className="inline-flex h-11 items-center justify-center rounded-lg bg-[var(--accent)] px-6 text-sm font-medium text-[#1a1510] transition-opacity hover:opacity-90"
-              >
-                Смотреть каталог
-              </Link>
-              <a
-                href="#request"
-                className="inline-flex h-11 items-center justify-center rounded-lg border border-white/[0.12] bg-[#0c0d0f]/25 px-6 text-sm font-medium text-[var(--text)] backdrop-blur-[2px] hover:border-[var(--accent)]/40"
-              >
-                Оставить заявку
-              </a>
-            </div>
+          <p className="text-xs font-medium uppercase tracking-[0.2em] text-[var(--accent)]">
+            Производство · B2B
+          </p>
+          <h1 className="mt-5 max-w-4xl text-3xl font-extrabold leading-[1.15] tracking-tight text-[var(--text)] drop-shadow-sm sm:text-4xl sm:leading-[1.12] lg:text-5xl">
+            {siteConfig.heroHeadline}
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[var(--muted)]">
+            {siteConfig.heroSubline}
+          </p>
+          <div className="mt-10 flex flex-wrap gap-4">
+            <Link
+              href="/catalog"
+              className="inline-flex h-11 items-center justify-center rounded-lg bg-[var(--accent)] px-6 text-sm font-medium text-[#1a1510] transition-opacity hover:opacity-90"
+            >
+              Смотреть каталог
+            </Link>
+            <a
+              href="#request"
+              className="inline-flex h-11 items-center justify-center rounded-lg border border-white/[0.12] bg-[#0c0d0f]/25 px-6 text-sm font-medium text-[var(--text)] backdrop-blur-[2px] hover:border-[var(--accent)]/40"
+            >
+              Оставить заявку
+            </a>
           </div>
+        </div>
+      </section>
 
-          <div className="mt-14 sm:mt-20">
-            <CategoryHeroCards
-              categories={categories.map((c) => ({
-                id: c.id,
-                slug: c.slug,
-                name: c.name,
-                shortDescription: c.shortDescription,
-              }))}
-            />
-          </div>
+      <section className="border-b border-white/[0.08] bg-[var(--bg)]">
+        <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
+          <CategoryHeroCards
+            categories={categories.map((c) => ({
+              id: c.id,
+              slug: c.slug,
+              name: c.name,
+              shortDescription: c.shortDescription,
+            }))}
+          />
         </div>
       </section>
 
