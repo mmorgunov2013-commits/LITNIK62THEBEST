@@ -32,10 +32,14 @@ export const siteConfig = {
   productImagePlaceholder: PLACEHOLDER_PRODUCT_IMAGE,
 } as const;
 
-/** Фон первого экрана: «крупный план» ×2, якорь — левый нижний угол кадра */
+/**
+ * Фон героя: крупный план (~×2 по ширине), якорь — левый нижний угол.
+ * Важно: `200% auto`, не `200% 200%` — иначе на мобильных фон растягивается по вертикали и горизонтали
+ * независимо и «сжимается» картинка.
+ */
 export const heroBackdropStyle: CSSProperties = {
   backgroundImage: `url(${siteConfig.heroBackgroundImage})`,
-  backgroundSize: "200% 200%",
+  backgroundSize: "200% auto",
   backgroundPosition: "left bottom",
   backgroundRepeat: "no-repeat",
 };

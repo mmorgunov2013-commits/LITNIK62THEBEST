@@ -23,6 +23,8 @@ type SourceFile = {
     categorySlug: string;
     sortOrder: number;
     image: string | null;
+    /** Публичные URL по порядку; первая может дублироваться в `image` для совместимости */
+    galleryImages?: string[];
     shortDescription: string;
     pricePerKgRub: number | null;
     priceDisplay?: string;
@@ -71,6 +73,10 @@ async function main() {
     const parts = [p.application, p.features, p.compositionText].filter(Boolean);
     const fullDescription = parts.join("\n\n");
 
+    const galleryImages = p.galleryImages?.filter(Boolean) ?? [];
+    const primaryImage =
+      p.image ?? (galleryImages.length > 0 ? galleryImages[0] : null);
+
     await prisma.product.create({
       data: {
         slug: p.slug,
@@ -89,7 +95,8 @@ async function main() {
         priceNote,
         priceDisplayOverride:
           p.pricePerKgRub == null ? p.priceDisplay ?? "??????????" : null,
-        image: null,
+        image: primaryImage,
+        galleryImages,
         status: "ACTIVE",
         sortOrder: p.sortOrder,
         seoTitle: `${p.title} | ЛИТНИК`,

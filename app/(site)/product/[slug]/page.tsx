@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ProductGallery } from "@/components/catalog/ProductGallery";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { formatPriceRub } from "@/lib/format";
 import { prisma } from "@/lib/prisma";
@@ -46,14 +47,21 @@ export default async function ProductPage({ params }: Props) {
 
       <div className="mt-8 grid gap-10 lg:grid-cols-2">
         <div>
-          <div className="aspect-[4/3] w-full overflow-hidden rounded-xl bg-[var(--surface2)] ring-1 ring-inset ring-white/[0.06]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={product.image ?? siteConfig.productImagePlaceholder}
-              alt=""
-              className="h-full w-full object-cover"
+          {product.galleryImages.length > 0 ? (
+            <ProductGallery
+              images={product.galleryImages}
+              productTitle={product.title}
             />
-          </div>
+          ) : (
+            <div className="aspect-[4/3] w-full overflow-hidden rounded-xl bg-[var(--surface2)] ring-1 ring-inset ring-white/[0.06]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={product.image ?? siteConfig.productImagePlaceholder}
+                alt=""
+                className="h-full w-full object-cover"
+              />
+            </div>
+          )}
         </div>
         <div>
           <p className="text-xs font-medium uppercase tracking-wider text-[var(--muted)]">

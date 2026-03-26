@@ -312,6 +312,21 @@ export function ProductForm({
 
       <div>
         <label className="text-xs text-[var(--muted)]">
+          Галерея: URL изображений по одному на строку (порядок как на сайте;
+          первое — превью в каталоге). Пути от корня сайта, например{" "}
+          <code className="text-[var(--text)]">/images/products/...</code>
+        </label>
+        <textarea
+          name="galleryImagesRaw"
+          rows={5}
+          defaultValue={product?.galleryImages?.join("\n") ?? ""}
+          className="mt-1 w-full rounded border border-white/10 bg-[var(--surface2)] px-3 py-2 font-mono text-sm"
+          placeholder="/images/products/..."
+        />
+      </div>
+
+      <div>
+        <label className="text-xs text-[var(--muted)]">
           Изображение (jpg/png/webp, до 5 МБ)
         </label>
         <input

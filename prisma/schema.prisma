@@ -43,6 +43,8 @@ model Product {
   priceNote                String?
   priceDisplayOverride     String?
   image                    String?
+  /** Публичные URL изображений по порядку (первая — превью в каталоге, если задана) */
+  galleryImages            String[]        @default([])
   status                   ProductStatus   @default(ACTIVE)
   sortOrder                Int             @default(0)
   seoTitle                 String?

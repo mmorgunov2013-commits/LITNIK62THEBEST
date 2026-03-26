@@ -9,6 +9,16 @@ import { writeFile, mkdir } from "fs/promises";
 import { join } from "path";
 import { randomUUID } from "crypto";
 
+function parseGalleryImagesRaw(raw: string | null | undefined): string[] {
+  if (!raw?.trim()) return [];
+  return raw
+    .split(/\r?\n/)
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .map((s) => s.slice(0, 500))
+    .slice(0, 40);
+}
+
 function parseSpecsJson(
   raw: string | null,
 ): { parameter: string; value: string; sortOrder: number }[] {
@@ -100,6 +110,11 @@ export async function createProduct(
     return { error: e instanceof Error ? e.message : "Ошибка загрузки файла" };
   }
 
+  const galleryImages = parseGalleryImagesRaw(
+    formData.get("galleryImagesRaw")?.toString(),
+  );
+  const imageFinal = imagePath ?? galleryImages[0] ?? null;
+
   const priceNum =
     parsed.data.pricePerKg?.trim() !== ""
       ? Number(parsed.data.pricePerKg?.replace(",", "."))
@@ -125,7 +140,8 @@ export async function createProduct(
         pricePerKg,
         priceNote: parsed.data.priceNote ?? null,
         priceDisplayOverride: parsed.data.priceDisplayOverride ?? null,
-        image: imagePath,
+        image: imageFinal,
+        galleryImages,
         status: parsed.data.status,
         sortOrder: parsed.data.sortOrder,
         seoTitle: parsed.data.seoTitle ?? null,
@@ -203,6 +219,10 @@ export async function updateProduct(
     return { error: e instanceof Error ? e.message : "Ошибка загрузки файла" };
   }
 
+  const galleryImages = parseGalleryImagesRaw(
+    formData.get("galleryImagesRaw")?.toString(),
+  );
+
   const priceNum =
     parsed.data.pricePerKg?.trim() !== ""
       ? Number(parsed.data.pricePerKg?.replace(",", "."))
@@ -232,6 +252,7 @@ export async function updateProduct(
         priceNote: parsed.data.priceNote ?? null,
         priceDisplayOverride: parsed.data.priceDisplayOverride ?? null,
         ...(removeImage ? { image: null } : imagePath ? { image: imagePath } : {}),
+        galleryImages,
         status: parsed.data.status,
         sortOrder: parsed.data.sortOrder,
         seoTitle: parsed.data.seoTitle ?? null,

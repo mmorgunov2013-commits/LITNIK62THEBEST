@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Category, Product } from "@prisma/client";
 import { formatPriceRub } from "@/lib/format";
+import { productPrimaryImageUrl } from "@/lib/product-media";
 import { siteConfig } from "@/lib/site";
 
 type Props = {
@@ -9,7 +10,8 @@ type Props = {
 
 export function ProductCard({ product }: Props) {
   const price = formatPriceRub(product.pricePerKg, product.priceDisplayOverride);
-  const imgSrc = product.image ?? siteConfig.productImagePlaceholder;
+  const imgSrc =
+    productPrimaryImageUrl(product) ?? siteConfig.productImagePlaceholder;
   return (
     <Link
       href={`/product/${product.slug}`}
