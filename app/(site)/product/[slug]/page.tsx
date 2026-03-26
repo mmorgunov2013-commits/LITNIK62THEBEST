@@ -46,7 +46,7 @@ export default async function ProductPage({ params }: Props) {
         </Link>
       </p>
 
-      <div className="mt-8 grid gap-10 lg:grid-cols-2">
+      <div className="mt-8 grid gap-8 lg:grid-cols-2 lg:items-start lg:gap-10">
         <div>
           <ProductGallery
             images={productGalleryUrls(product)}
@@ -80,7 +80,7 @@ export default async function ProductPage({ params }: Props) {
         </div>
       </div>
 
-      <div className="mt-14 grid gap-10 lg:grid-cols-2">
+      <div className="mt-10 grid gap-10 lg:grid-cols-2 lg:items-start">
         <div className="space-y-6 text-sm leading-relaxed text-[var(--muted)]">
           {product.application ? (
             <section>

@@ -13,7 +13,7 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* Только первый экран: фон героя не тянется на блок «Категории» (иначе на телефоне картинка визуально «уезжает» вниз). */}
+      {/* Один блок: текст, кнопки и «Категории» на том же фоне гранул */}
       <section className="relative overflow-hidden border-b border-white/[0.08]">
         <div
           className="lit-hero-backdrop absolute inset-0"
@@ -21,20 +21,20 @@ export default async function HomePage() {
           aria-hidden
         />
         <div
-          className="absolute inset-0 bg-gradient-to-b from-[#0c0d0f]/88 via-[#0c0d0f]/72 to-[var(--bg)]"
+          className="absolute inset-0 bg-gradient-to-b from-[#0c0d0f]/88 via-[#0c0d0f]/76 to-[#0c0d0f]/94"
           aria-hidden
         />
-        <div className="relative z-10 mx-auto flex max-w-6xl flex-col px-4 py-16 sm:px-6 sm:py-24">
+        <div className="relative z-10 mx-auto flex max-w-6xl flex-col px-4 pb-12 pt-12 sm:px-6 sm:pb-16 sm:pt-16 lg:pb-20">
           <p className="text-xs font-medium uppercase tracking-[0.2em] text-[var(--accent)]">
             Производство · B2B
           </p>
-          <h1 className="mt-5 max-w-4xl text-3xl font-extrabold leading-[1.15] tracking-tight text-[var(--text)] drop-shadow-sm sm:text-4xl sm:leading-[1.12] lg:text-5xl">
+          <h1 className="mt-4 max-w-4xl text-3xl font-extrabold leading-[1.15] tracking-tight text-[var(--text)] drop-shadow-sm sm:mt-5 sm:text-4xl sm:leading-[1.12] lg:text-5xl">
             {siteConfig.heroHeadline}
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[var(--muted)]">
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-[var(--muted)] sm:mt-6">
             {siteConfig.heroSubline}
           </p>
-          <div className="mt-10 flex flex-wrap gap-4">
+          <div className="mt-8 flex flex-wrap gap-4 sm:mt-10">
             <Link
               href="/catalog"
               className="inline-flex h-11 items-center justify-center rounded-lg bg-[var(--accent)] px-6 text-sm font-medium text-[#1a1510] transition-opacity hover:opacity-90"
@@ -48,19 +48,17 @@ export default async function HomePage() {
               Оставить заявку
             </a>
           </div>
-        </div>
-      </section>
 
-      <section className="border-b border-white/[0.08] bg-[var(--bg)]">
-        <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
-          <CategoryHeroCards
-            categories={categories.map((c) => ({
-              id: c.id,
-              slug: c.slug,
-              name: c.name,
-              shortDescription: c.shortDescription,
-            }))}
-          />
+          <div className="mt-10 sm:mt-12">
+            <CategoryHeroCards
+              categories={categories.map((c) => ({
+                id: c.id,
+                slug: c.slug,
+                name: c.name,
+                shortDescription: c.shortDescription,
+              }))}
+            />
+          </div>
         </div>
       </section>
 
