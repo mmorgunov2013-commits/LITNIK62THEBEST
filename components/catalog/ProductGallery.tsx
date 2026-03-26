@@ -136,7 +136,7 @@ export function ProductGallery({ images, productTitle }: Props) {
           ) : null}
 
           <div
-            className="relative z-10 mx-auto max-h-[min(90vh,100%)] max-w-[min(96vw,1200px)] touch-pan-y"
+            className="relative z-10 mx-auto flex max-h-[min(45vh,520px)] max-w-[min(48vw,600px)] touch-pan-y items-center justify-center sm:max-h-[min(50vh,560px)] sm:max-w-[min(42vw,640px)]"
             onClick={(e) => e.stopPropagation()}
             onTouchStart={(e) => {
               touchStartX.current = e.touches[0]?.clientX ?? null;
@@ -155,7 +155,7 @@ export function ProductGallery({ images, productTitle }: Props) {
             <img
               src={images[lightbox]}
               alt=""
-              className="max-h-[min(90vh,100%)] max-w-full object-contain"
+              className="max-h-[min(45vh,520px)] max-w-full object-contain sm:max-h-[min(50vh,560px)]"
             />
           </div>
 

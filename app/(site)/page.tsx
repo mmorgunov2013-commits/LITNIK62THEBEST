@@ -14,7 +14,7 @@ export default async function HomePage() {
   return (
     <>
       {/* Только первый экран: фон героя не тянется на блок «Категории» (иначе на телефоне картинка визуально «уезжает» вниз). */}
-      <section className="relative min-h-[min(88vh,52rem)] overflow-hidden border-b border-white/[0.08]">
+      <section className="relative overflow-hidden border-b border-white/[0.08]">
         <div
           className="lit-hero-backdrop absolute inset-0"
           style={heroBackdropStyle}
