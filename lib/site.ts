@@ -1,5 +1,7 @@
 import type { CSSProperties } from "react";
 
+/** См. `.lit-hero-backdrop` в `app/globals.css` — cover и позиция на мобилке */
+
 /** Плейсхолдер изображения товара в каталоге, если в админке нет своего фото (`hero-category-placeholder.png`) */
 const PLACEHOLDER_PRODUCT_IMAGE = "/images/hero-category-placeholder.png" as const;
 
@@ -32,14 +34,6 @@ export const siteConfig = {
   productImagePlaceholder: PLACEHOLDER_PRODUCT_IMAGE,
 } as const;
 
-/**
- * Фон героя: крупный план (~×2 по ширине), якорь — левый нижний угол.
- * Важно: `200% auto`, не `200% 200%` — иначе на мобильных фон растягивается по вертикали и горизонтали
- * независимо и «сжимается» картинка.
- */
 export const heroBackdropStyle: CSSProperties = {
   backgroundImage: `url(${siteConfig.heroBackgroundImage})`,
-  backgroundSize: "200% auto",
-  backgroundPosition: "left bottom",
-  backgroundRepeat: "no-repeat",
 };

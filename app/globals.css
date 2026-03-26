@@ -38,6 +38,19 @@ body {
   font-family: var(--font-manrope), system-ui, sans-serif;
 }
 
+/* Герой: без лишнего zoom из inline; на телефоне чуть смещаем кадр вверх — больше гранул в зоне первого экрана */
+.lit-hero-backdrop {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+@media (max-width: 640px) {
+  .lit-hero-backdrop {
+    background-position: center 42%;
+  }
+}
+
 ::selection {
   background: var(--accent-dim);
   color: var(--text);

@@ -66,14 +66,15 @@ export function ProductGallery({ images, productTitle }: Props) {
       {images.length > 1 ? (
         <div className="grid grid-cols-3 gap-2 sm:grid-cols-5">
           {images.slice(1).map((src, i) => {
-            const idx = i + 1;
+            const indexInGallery = i + 1;
+            const photoNumber = i + 2;
             return (
               <button
-                key={src}
+                key={`${indexInGallery}-${src}`}
                 type="button"
-                onClick={() => open(idx)}
+                onClick={() => open(indexInGallery)}
                 className="relative aspect-square overflow-hidden rounded-lg bg-[var(--surface2)] ring-1 ring-inset ring-white/[0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
-                aria-label={`Фото ${idx + 1}, увеличить`}
+                aria-label={`Фото ${photoNumber} из ${images.length}, увеличить`}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
