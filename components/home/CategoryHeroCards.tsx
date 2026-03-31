@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { catalogCategoryTileImage } from "@/lib/catalog-category-images";
 import { metalShimmerForSlug } from "@/lib/category-shimmer";
 
 export type CategoryCardItem = {
@@ -142,6 +143,7 @@ export function CategoryHeroCards({
           const isHovered = hoveredId === c.id;
           const isPeriodic = shimmeringIds.has(c.id);
           const active = isHovered || isPeriodic;
+          const tileSrc = catalogCategoryTileImage(c.slug);
           const showShimmerOverlay = active && !prefersReducedMotion;
           const linkBody = (
             <>
@@ -180,13 +182,26 @@ export function CategoryHeroCards({
               {photoPlaceholders ? (
                 <>
                   <div
-                    className="animate-lit-catalog-placeholder-rise relative z-20 -mb-3 flex aspect-[4/3] w-full flex-col items-center justify-center rounded-t-xl border border-b-0 border-white/[0.12] bg-gradient-to-b from-[#1c1f26]/95 to-[#14161a]/90 px-2 text-center shadow-[0_-8px_28px_-12px_rgba(0,0,0,0.85)] backdrop-blur-[4px] sm:-mb-4"
+                    className="animate-lit-catalog-placeholder-rise relative z-20 -mb-3 aspect-[4/3] w-full overflow-hidden rounded-t-xl border border-b-0 border-white/[0.12] bg-[#14161a] shadow-[0_-8px_28px_-12px_rgba(0,0,0,0.85)] sm:-mb-4"
                     style={{ animationDelay: `${80 + index * 70}ms` }}
                     aria-hidden
                   >
-                    <span className="select-none text-[0.65rem] font-medium uppercase tracking-[0.35em] text-[var(--muted)]">
-                      фотофотофото
-                    </span>
+                    {tileSrc ? (
+                      // eslint-disable-next-line @next/next/no-img-element -- статика из /public, без оптимизации next/image
+                      <img
+                        src={tileSrc}
+                        alt=""
+                        className="h-full w-full object-cover"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    ) : (
+                      <div className="flex h-full min-h-[6rem] w-full flex-col items-center justify-center bg-gradient-to-b from-[#1c1f26]/95 to-[#14161a]/90 px-2 text-center backdrop-blur-[4px]">
+                        <span className="select-none text-[0.65rem] font-medium uppercase tracking-[0.35em] text-[var(--muted)]">
+                          фотофотофото
+                        </span>
+                      </div>
+                    )}
                   </div>
                   <Link
                     href={cardHref}
