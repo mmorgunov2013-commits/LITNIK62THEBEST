@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { CategorySceneSection } from "@/components/catalog/CategorySceneSection";
 import { ProductGallery } from "@/components/catalog/ProductGallery";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { formatPriceRub } from "@/lib/format";
@@ -32,7 +33,7 @@ export default async function ProductPage({ params }: Props) {
   const price = formatPriceRub(product.pricePerKg, product.priceDisplayOverride);
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <CategorySceneSection categorySlug={product.category.slug}>
       <p className="text-sm text-[var(--muted)]">
         <Link href="/catalog" className="hover:text-[var(--accent)]">
           Каталог
@@ -158,6 +159,6 @@ export default async function ProductPage({ params }: Props) {
           </div>
         </div>
       </div>
-    </div>
+    </CategorySceneSection>
   );
 }

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { CategorySceneSection } from "@/components/catalog/CategorySceneSection";
 import { ProductCard } from "@/components/catalog/ProductCard";
 import { prisma } from "@/lib/prisma";
 
@@ -32,7 +33,7 @@ export default async function CategoryPage({ params }: Props) {
   if (!category) notFound();
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <CategorySceneSection categorySlug={category.slug}>
       <p className="text-sm text-[var(--muted)]">
         <Link href="/catalog" className="hover:text-[var(--accent)]">
           Каталог
@@ -54,6 +55,6 @@ export default async function CategoryPage({ params }: Props) {
           <ProductCard key={p.id} product={p} />
         ))}
       </div>
-    </div>
+    </CategorySceneSection>
   );
 }
